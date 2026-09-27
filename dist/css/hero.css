@@ -1,0 +1,73 @@
+/* Permanent composition. Motion is an enhancement, never a prerequisite for copy. */
+.hero-story{height:auto;position:relative}
+.hero-stage{position:relative;height:auto;min-height:100svh;overflow:clip}
+.hero-image{height:100svh;min-height:690px;object-position:55% center;animation:none}
+.hero-shade{background:linear-gradient(90deg,#0b0c0ce6 0%,#0b0c0c66 42%,#0b0c0c00 75%),linear-gradient(0deg,#101111 0%,transparent 40%,#09090955 100%);pointer-events:none}
+.vault-canvas{position:absolute;inset:0;height:100svh;min-height:690px;opacity:0;pointer-events:none;transition:opacity .5s var(--ease-out)}
+.vault-canvas canvas{width:100%;height:100%;display:block}
+.hero-content{position:relative;top:auto;left:auto;right:auto;margin:0 5.5%;padding:calc(29svh + 5px) 0 65px;perspective:1200px;perspective-origin:30% 40%;z-index:4}
+.hero-brandplate{position:relative;transform-origin:left center}
+.hero-content h1{animation:enter .55s var(--spring) .1s both;white-space:nowrap}
+.hero-opening-kicker{margin-bottom:32px}
+.hero-join{margin-top:35px;position:relative;z-index:5}
+.hero-chapters{max-width:660px;margin-top:45px}
+.story-chapter{position:relative;padding:30px 0;border-top:1px solid #ffffff26;transform-origin:left center}
+.story-chapter .eyebrow{color:#babbb3;margin-bottom:23px}
+.story-line{font-size:19px;line-height:1.5;color:#d7d7d2}
+.chapter-title{font:700 clamp(3.2rem,7.8vw,7.5rem)/.91 var(--display);letter-spacing:-.035em;margin-bottom:25px;color:var(--paper)}
+.chapter-loot{font-size:clamp(5rem,11vw,11rem);color:var(--red)}
+.hero-bottom{position:relative;left:auto;right:auto;bottom:auto;margin:0 5.5%;padding-bottom:35px}
+.scroll-label,.beat-count{display:none}
+/* Once a real frame has rendered, the geometry pins and children have depth. */
+.hero-enhanced{height:420svh}
+.hero-enhanced .hero-stage{position:sticky;top:0;height:100svh;min-height:690px}
+.hero-enhanced .vault-canvas{opacity:1;height:100%;min-height:0}
+.hero-enhanced .hero-image{height:100%;min-height:0}
+.hero-enhanced .hero-content{position:absolute;top:29%;left:5.5%;right:5.5%;margin:0;padding:0;height:430px;transform-style:preserve-3d}
+.hero-enhanced .hero-brandplate{position:absolute;inset:0;animation:none}
+.hero-enhanced .hero-content h1{animation:none}
+.hero-enhanced .hero-opening-kicker{margin-bottom:32px}
+.hero-enhanced .hero-chapters{position:absolute;inset:0;margin:0;max-width:none;transform-style:preserve-3d;pointer-events:none}
+.hero-enhanced .story-chapter{position:absolute;left:0;top:0;width:100%;padding:0;border:0;opacity:0;transform:translate3d(35px,12px,-220px) rotateY(6deg);backface-visibility:hidden}
+.hero-enhanced .story-chapter[data-story-chapter="0"],.hero-enhanced .story-chapter[data-story-chapter="1"]{top:230px}
+.hero-enhanced .story-chapter[data-story-chapter="1"]>.eyebrow{position:absolute;top:-230px;left:0}
+.hero-enhanced .story-chapter[data-story-chapter="0"]{opacity:1;transform:none}
+.hero-enhanced .story-chapter[data-story-chapter="2"] .chapter-title{margin-top:34px}
+.hero-enhanced .chapter-recruiting{margin-top:34px}
+.hero-enhanced .story-line{font-size:19px}
+.hero-enhanced .hero-join{position:absolute;left:0;top:350px;margin:0}
+.hero-enhanced .hero-bottom{position:absolute;left:5.5%;right:5.5%;bottom:35px;padding:0;margin:0}
+.hero-enhanced .scroll-label,.hero-enhanced .beat-count{display:flex}
+.hero-enhanced .hero-topline{animation:none}
+.hero-enhanced .hero-brandplate,.hero-enhanced .story-chapter{transition:none}
+.hero-story[data-scene-state="fallback"] .vault-canvas{opacity:0}
+@media(min-width:1600px){.hero-enhanced .hero-content{top:31%}.hero-enhanced .story-chapter[data-story-chapter="0"],.hero-enhanced .story-chapter[data-story-chapter="1"]{top:265px}.hero-enhanced .story-chapter[data-story-chapter="1"]>.eyebrow{top:-265px}.hero-enhanced .hero-join{top:395px}}
+@media(max-width:767px){
+ .hero-stage{min-height:640px}.hero-image{min-height:640px;object-position:66% center}
+ .hero-content{margin:0 6%;padding-top:29svh;perspective:900px}
+ .hero-content h1{white-space:normal}.hero-opening-kicker{font-size:9px;letter-spacing:.07em;margin-bottom:20px}
+ .hero-chapters{margin-top:35px}.story-chapter{padding:25px 0}.story-line{font-size:17px}
+ .chapter-title{font-size:clamp(3.6rem,15vw,6rem);margin-bottom:20px}.chapter-loot{font-size:22vw}
+ .hero-bottom{margin:0 6%;padding-bottom:90px}
+ .hero-enhanced{height:330svh}.hero-enhanced .hero-stage{min-height:640px}
+ .hero-enhanced .hero-content{top:29%;left:6%;right:6%;height:430px;perspective:900px}
+ .hero-enhanced .hero-opening-kicker{margin-bottom:20px}
+ .hero-enhanced .story-chapter[data-story-chapter="0"],.hero-enhanced .story-chapter[data-story-chapter="1"]{top:230px}
+ .hero-enhanced .story-chapter[data-story-chapter="1"]>.eyebrow{top:-230px;font-size:10px}
+ .hero-enhanced .story-line{font-size:17px}.hero-enhanced .chapter-recruiting{font-size:17vw}
+ .hero-enhanced .hero-join{top:330px}
+ .hero-enhanced .hero-bottom{bottom:86px;left:6%;right:6%}.hero-enhanced .scroll-label{display:none}
+}
+@media(max-width:767px) and (max-height:700px){
+ .hero-enhanced .hero-content{top:25%}.hero-enhanced .hero-join{top:290px}
+ .hero-enhanced .story-chapter[data-story-chapter="0"],.hero-enhanced .story-chapter[data-story-chapter="1"]{top:200px}
+ .hero-enhanced .story-chapter[data-story-chapter="1"]>.eyebrow{top:-200px}
+ .hero-enhanced .chapter-title{font-size:14vw}.hero-enhanced .chapter-loot{font-size:22vw}
+}
+/* These rules also apply when the preference changes while reading. */
+.motion-off .hero-story{height:auto}.motion-off .hero-stage{position:relative;height:auto}
+.motion-off .hero-chapters{position:relative}.motion-off .story-chapter{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+ .hero-story{height:auto}.hero-stage{position:relative;height:auto}.hero-image{animation:none;transform:none}
+ .vault-canvas{display:none}.hero-brandplate,.story-chapter{transform:none!important;opacity:1!important}
+}

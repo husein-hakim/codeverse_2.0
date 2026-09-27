@@ -5,10 +5,10 @@
 <title>CodeVerse 2.0 · The Heist</title>
 <meta name="description" content="CodeVerse 2.0: a heist-themed tech event on 9 October. The Professor is recruiting.">
 <meta name="theme-color" content="#111111">
-<meta property="og:title" content="CodeVerse 2.0 · The Heist"><meta property="og:description" content="Forty-five crews of three. One mint. 9 October at DJSCE Mumbai. ₹25,000 in prizes."><meta property="og:type" content="website"><meta property="og:image" content="https://codeverse-the-heist.huseinhakim.chatgpt.site/assets/social-preview.jpg"><meta name="twitter:card" content="summary_large_image"><meta property="og:image:alt" content="Forty-five crews of three. One mint."><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:url" content="https://codeverse-the-heist.huseinhakim.chatgpt.site"><link rel="canonical" href="https://codeverse-the-heist.huseinhakim.chatgpt.site">
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="css/style.css">
-<script src="js/config.js" defer></script><script src="js/app.js" defer></script>
-<noscript><style>.loading,.story-triggers,.beat-count,.scroll-label{display:none}.hero-story{height:100svh}</style></noscript>
+<meta property="og:title" content="CodeVerse 2.0 · The Heist"><meta property="og:description" content="Forty-five crews of three. One mint. 9 October at DJSCE Mumbai. ₹25,000 in prizes."><meta property="og:type" content="website"><meta property="og:image" content="assets/social-preview.jpg"><meta name="twitter:card" content="summary_large_image"><meta property="og:image:alt" content="Forty-five crews of three. One mint."><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><!-- DEPLOYMENT_METADATA -->
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/hero.css">
+<script src="js/config.js" defer></script><script src="js/vendor/gsap.min.js" defer></script><script src="js/vendor/ScrollTrigger.min.js" defer></script><script src="js/app.js" defer></script>
+<noscript><style>.loading{display:none}</style></noscript>
 </head>
 <body>
 <a class="skip-link" href="#briefing">Skip to event details</a>
@@ -19,19 +19,25 @@
 <div id="mobile-menu" hidden><a href="#briefing">The Briefing</a><a href="#plan">The Plan</a><a href="#schedule">The Schedule</a><a href="#loot">The Loot</a><a href="#rules">Rules</a></div>
 </header>
 <main>
-<section class="hero-story" id="top" aria-label="Operation CodeVerse introduction">
+<section class="hero-story" id="top" aria-label="Operation CodeVerse introduction" data-scene-state="loading">
 <div class="hero-stage">
-<img class="hero-image" src="assets/vault.png" alt="Two crew members in red jumpsuits walk through an open vault door, past stacks of cash." width="1920" height="1080" fetchpriority="high">
+<img class="hero-image" src="assets/vault.png" alt="Two crew members in red jumpsuits walk through an open vault door, past stacks of cash." width="1672" height="941" fetchpriority="high">
+<div class="vault-canvas" aria-hidden="true"></div>
 <div class="hero-shade"></div>
 <div class="hero-topline"><span>CODEAI PRESENTS</span><span>OPERATION / CV–02</span></div>
 <div class="hero-content">
-<p class="eyebrow hero-kicker" id="hero-kicker">Madrid · 09.10 · Operation CodeVerse</p>
-<h1>CODEVERSE<span class="edition">2.0<span class="heist-label">THE HEIST</span></span></h1>
-<div class="beat-panel" aria-live="off"><p id="hero-line">Today, the training ends.<br>Today, you go in.</p><a class="button hero-join" data-join href="#registration">Opens 29 Sep <span>↗</span></a></div>
+<div class="hero-brandplate"><p class="eyebrow hero-opening-kicker">Madrid · 09.10 · Operation CodeVerse</p><h1>CODEVERSE<span class="edition">2.0<span class="heist-label">THE HEIST</span></span></h1></div>
+<a class="button hero-join" data-join href="#registration">Opens 29 Sep <span>↗</span></a>
+<div class="hero-chapters">
+<article class="story-chapter" data-story-chapter="0"><p class="story-line">Today, the training ends.<br>Today, you go in.</p></article>
+<article class="story-chapter" data-story-chapter="1"><p class="eyebrow">The Professor presents</p><p class="story-line">Forty-five crews of three.<br>One mint.</p></article>
+<article class="story-chapter" data-story-chapter="2"><p class="eyebrow">Phase 01 · Entry</p><p class="chapter-title">Two phases.<br>Ten hours.</p><p class="story-line">No second chances.</p></article>
+<article class="story-chapter" data-story-chapter="3"><p class="eyebrow">Phase 02 · The Loot</p><p class="chapter-title chapter-loot">₹25,000</p><p class="story-line">Inside the vault.<br>Waiting for the right crew.</p></article>
+<article class="story-chapter" data-story-chapter="4"><p class="eyebrow">The heist begins 09 October</p><p class="chapter-title chapter-recruiting">The Professor<br>is recruiting.</p></article>
 </div>
-<div class="hero-bottom"><a href="#briefing" class="skip-intro">Skip intro ↓</a><span class="scroll-label">SCROLL TO BREAK IN <span class="line-arrow">↓</span></span><div class="beat-count"><span id="beat-number">01</span><span class="beat-track"><i></i><i></i><i></i><i></i><i></i></span><span>/ 05</span></div></div>
 </div>
-<div class="story-triggers" aria-hidden="true"><div data-beat="0"></div><div data-beat="1"></div><div data-beat="2"></div><div data-beat="3"></div><div data-beat="4"></div></div>
+<div class="hero-bottom"><a href="#briefing" class="skip-intro">Skip intro ↓</a><span class="scroll-label">SCROLL TO BREAK IN <span class="line-arrow">↓</span></span><div class="beat-count"><span id="beat-number">01</span><span class="beat-track"><i class="active"></i><i></i><i></i><i></i><i></i></span><span>/ 05</span></div></div>
+</div>
 </section>
 <div class="event-strip" data-reveal><span>09 OCTOBER 2026</span><span>DJSCE, MUMBAI</span><span>45 CREWS · 3 MEMBERS</span><span>10 HOURS. ONE SHOT.</span></div>
 <section class="section briefing" id="briefing">

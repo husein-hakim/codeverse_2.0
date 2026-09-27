@@ -1,0 +1,17 @@
+{
+  "name": "codeverse-the-heist",
+  "version": "2.0.0",
+  "private": true,
+  "engines": { "node": ">=20" },
+  "description": "CodeVerse 2.0 — an independent static competition website",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/serve.mjs --dist",
+    "check": "node --check js/app.js && node --check js/hero-3d.js && node --check scripts/build.mjs"
+  },
+  "dependencies": {
+    "gsap": "3.13.0",
+    "three": "0.180.0"
+  }
+}

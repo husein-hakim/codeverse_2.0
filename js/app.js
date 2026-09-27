@@ -5,7 +5,6 @@ const $$ = (s) => [...document.querySelectorAll(s)];
 const config = window.CODEVERSE_CONFIG || {};
 const media = matchMedia('(prefers-reduced-motion: reduce)');
 let manualMotionOff = false;
-let currentBeat = -1;
 const reduced = () => media.matches || manualMotionOff;
 document.documentElement.classList.add('js');
 const loader = $('.loading');
@@ -48,37 +47,29 @@ function updateRegistration() {
 updateRegistration(); setInterval(updateRegistration,30000);
 $$('[data-join]').forEach(a=>a.addEventListener('click',()=>{if(a.dataset.state==='open'&&!config.unstopUrl)toast('The Unstop link is coming soon. Contact Adish Shah for details.');}));
 window.CodeVerse={registrationState,times};
-const beats=[
- ['Madrid · 09.10 · Operation CodeVerse','Today, the training ends.\nToday, you go in.'],
- ['The Professor presents','Forty-five crews of three.\nOne mint.'],
- ['Phase 01 · Entry','Two phases. Ten hours.\nNo second chances.'],
- ['Phase 02 · The Loot','₹25,000. Inside the vault.\nWaiting for the right crew.'],
- ['The heist begins 09 October','The Professor is recruiting.']
-];
-function beat(index) {
- if(reduced() || index===currentBeat) return;
- currentBeat=index;$('#hero-kicker').textContent=beats[index][0];$('#hero-line').replaceChildren();
- beats[index][1].split('\n').forEach((line,i)=>{if(i)$('#hero-line').append(document.createElement('br'));$('#hero-line').append(document.createTextNode(line));});
- $('#beat-number').textContent=String(index+1).padStart(2,'0');$$('.beat-track i').forEach((e,i)=>e.classList.toggle('active',i<=index));
- $('.beat-panel').classList.remove('changing');$('#hero-kicker').classList.remove('changing');
- requestAnimationFrame(()=>{$('.beat-panel').classList.add('changing');$('#hero-kicker').classList.add('changing');});
-}
-beat(0);
-let storyObserver;
-function observeStory(){
- storyObserver?.disconnect();
- const margin=Math.round(innerHeight*.45);
- storyObserver=new IntersectionObserver(entries=>{for(const e of entries)if(e.isIntersecting)beat(Number(e.target.dataset.beat));},{rootMargin:`-${margin}px 0px -${margin}px 0px`,threshold:0});
- $$('[data-beat]').forEach(e=>storyObserver.observe(e));
-}
-observeStory();
-let resizeTimer;addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(observeStory,150);},{passive:true});
 function updateMotion(){
- document.body.classList.toggle('motion-off',reduced());$('#motion-toggle').textContent=`Motion: ${reduced()?'off':'on'}`;$('#motion-toggle').setAttribute('aria-pressed',String(reduced()));
- if(reduced()){ $('#hero-kicker').textContent=beats[0][0];$('#hero-line').textContent='Forty-five crews of three. One mint.';$$('[data-reveal]').forEach(e=>e.classList.add('visible')); }
- else {currentBeat=-1;beat(0);}
+ document.body.classList.toggle('motion-off',reduced());
+ $('#motion-toggle').textContent=`Motion: ${reduced()?'off':'on'}`;
+ $('#motion-toggle').setAttribute('aria-pressed',String(reduced()));
+ if(reduced()) $$('[data-reveal]').forEach(e=>e.classList.add('visible'));
+ dispatchEvent(new CustomEvent('codeverse:motionchange',{detail:{reduced:reduced()}}));
 }
-$('#motion-toggle').addEventListener('click',()=>{manualMotionOff=!manualMotionOff;updateMotion();if(media.matches&&!manualMotionOff)toast('Reduced motion is enabled in your device settings.');});media.addEventListener('change',updateMotion);updateMotion();
+$('#motion-toggle').addEventListener('click',()=>{manualMotionOff=!manualMotionOff;updateMotion();if(media.matches&&!manualMotionOff)toast('Reduced motion is enabled in your device settings.');});
+media.addEventListener('change',updateMotion);updateMotion();
+// The permanent poster and all five chapters render before the 3D module loads.
+const hero=$('.hero-story');
+const settleFallback=async()=>{
+ await Promise.race([$('.hero-image').decode().catch(()=>{}),new Promise(r=>setTimeout(r,1500))]);
+ if(hero.dataset.sceneState==='loading') hero.dataset.sceneState='fallback';
+};
+let sceneTimeout=setTimeout(settleFallback,8000);
+import('./hero-3d.js').then(({mountVaultStory})=>mountVaultStory(hero)).then(()=>clearTimeout(sceneTimeout)).catch(()=>{clearTimeout(sceneTimeout);settleFallback();});
+const siteOrigin=config.siteUrl||location.origin;
+if(/^https?:\/\//.test(siteOrigin)){
+ if(!$('link[rel=canonical]')){const link=document.createElement('link');link.rel='canonical';link.href=siteOrigin+'/';document.head.append(link);}
+ if(!$('meta[property="og:url"]')){const meta=document.createElement('meta');meta.setAttribute('property','og:url');meta.content=siteOrigin+'/';document.head.append(meta);}
+ $('meta[property="og:image"]').content=new URL('assets/social-preview.jpg',siteOrigin+'/').href;
+}
 const revealObserver=new IntersectionObserver(entries=>{entries.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('visible');e.target.querySelectorAll('[data-count]').forEach(counter=>{if(reduced())return;const target=Number(counter.dataset.count),start=performance.now();function tick(now){const p=Math.min((now-start)/650,1);counter.textContent=Math.round((1-Math.pow(1-p,3))*target);if(p<1)requestAnimationFrame(tick);}requestAnimationFrame(tick);});revealObserver.unobserve(e.target);});},{threshold:.08,rootMargin:'0px 0px -30px 0px'});$$('[data-reveal]').forEach(e=>revealObserver.observe(e));
 const menu=$('.menu-toggle');function closeMenu(){menu.setAttribute('aria-expanded','false');$('#mobile-menu').hidden=true;menu.setAttribute('aria-label','Open navigation');}
 menu.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')==='true';menu.setAttribute('aria-expanded',String(!open));$('#mobile-menu').hidden=open;menu.setAttribute('aria-label',open?'Open navigation':'Close navigation');});$$('#mobile-menu a').forEach(a=>a.addEventListener('click',closeMenu));document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeMenu();}});
