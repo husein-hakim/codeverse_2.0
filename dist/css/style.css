@@ -12,3 +12,6 @@
 @media(max-width:767px){.id-actions button,.footer-bottom button,.footer-contact a,.footer-nav a{min-height:44px}.footer-nav a{display:inline-flex;align-items:center}.skip-intro{display:inline-flex;align-items:center;min-height:44px}}
 .story-triggers{display:block}.story-triggers>div{height:calc((100% - 85svh)/4)}.story-triggers>div:first-child{height:85svh}
 @media(max-width:767px){.statusbar{line-height:1.35;text-align:center}.status-dot{flex-shrink:0}.statusbar>span:nth-child(2){max-width:calc(100% - 15px)}}
+.js .phase.visible:hover,.js .prize.visible:hover{transform:translateY(-4px)}
+@media(prefers-reduced-motion:reduce){.js .phase.visible:hover,.js .prize.visible:hover{transform:none}}
+.motion-off .phase.visible:hover,.motion-off .prize.visible:hover{transform:none}
